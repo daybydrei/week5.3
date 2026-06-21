@@ -120,27 +120,6 @@ body{
    GOLDEN SPARKS
 ========================================================= */
 
-#spark-container{
-    position:absolute;
-    inset:0;
-
-    pointer-events:none;
-
-    z-index:90;
-}
-
-.spark{
-    position:absolute;
-
-    width:8px;
-    height:8px;
-
-    background-image:
-    url("assets/golden-spark.png");
-
-    background-size:contain;
-    background-repeat:no-repeat;
-}
 
 /* =========================================================
    OWL SCENE
@@ -479,6 +458,11 @@ body{
     visibility:hidden;
 
     z-index:100;
+    pointer-events:none;
+}
+
+#ending-content{
+    pointer-events:auto;
 }
 
 #ending-content{
@@ -606,5 +590,12 @@ body{
     16px
     max(16px,env(safe-area-inset-bottom))
     16px;
+}
+
+.star-row{
+
+    font-size:1.2rem;
+
+    letter-spacing:10px;
 }
 
