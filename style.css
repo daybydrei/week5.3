@@ -1,0 +1,592 @@
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    /* allow native touch panning for nested scrollable elements */
+    touch-action:auto;
+}
+
+body{
+    background:#000;
+    font-family:'Cormorant Garamond',serif;
+    color:#1C1A17;
+}
+
+/* =========================================================
+   APP ROOT
+========================================================= */
+
+#app{
+    position:relative;
+    width:100vw;
+    height:100dvh;
+    overflow:hidden;
+    /* ensure the app container doesn't block touch gestures */
+    touch-action:auto;
+}
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+#background-layer{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+}
+
+#hogwarts-bg{
+    position:absolute;
+    inset:-8%;
+
+    background-image:url("assets/hogwarts-night.png");
+    background-size:cover;
+    background-position:center center;
+    background-repeat:no-repeat;
+
+    transform:scale(1);
+
+    will-change:transform;
+}
+
+#background-vignette{
+    position:absolute;
+    inset:0;
+
+    background:
+    radial-gradient(
+        circle at center,
+        transparent 20%,
+        rgba(0,0,0,.35) 70%,
+        rgba(0,0,0,.7) 100%
+    );
+}
+
+#background-fog{
+    position:absolute;
+    inset:0;
+
+    background:
+    linear-gradient(
+        to top,
+        rgba(255,255,255,.06),
+        transparent 40%
+    );
+
+    mix-blend-mode:screen;
+}
+
+/* =========================================================
+   DUST
+========================================================= */
+
+#dust-container{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    z-index:5;
+}
+
+.dust{
+    position:absolute;
+
+    width:4px;
+    height:4px;
+
+    border-radius:50%;
+
+    background:
+    rgba(255,220,160,.85);
+
+    box-shadow:
+    0 0 8px rgba(255,220,160,.8),
+    0 0 18px rgba(255,220,160,.6);
+}
+
+/* =========================================================
+   GOLDEN SPARKS
+========================================================= */
+
+#spark-container{
+    position:absolute;
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:90;
+}
+
+.spark{
+    position:absolute;
+
+    width:8px;
+    height:8px;
+
+    background-image:
+    url("assets/golden-spark.png");
+
+    background-size:contain;
+    background-repeat:no-repeat;
+}
+
+/* =========================================================
+   OWL SCENE
+========================================================= */
+
+#owl-scene{
+    position:absolute;
+    inset:0;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    z-index:10;
+}
+
+/* =========================================================
+   OWL
+========================================================= */
+
+#owl-wrapper{
+
+    position:absolute;
+
+    width:min(72vw,320px);
+
+    aspect-ratio:1/1;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    cursor:pointer;
+
+    will-change:transform;
+}
+
+#owl{
+
+    width:100%;
+    height:auto;
+
+    user-select:none;
+    pointer-events:none;
+
+    filter:
+    drop-shadow(0 18px 35px rgba(0,0,0,.45));
+}
+
+/* =========================================================
+   TAP HINT
+========================================================= */
+
+#tap-hint{
+
+    position:absolute;
+
+    bottom:13%;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    gap:12px;
+
+    color:white;
+
+    text-transform:uppercase;
+
+    letter-spacing:4px;
+
+    font-size:.78rem;
+
+    z-index:20;
+}
+
+.hint-glow{
+
+    width:14px;
+    height:14px;
+
+    border-radius:50%;
+
+    background:#ffd27a;
+
+    box-shadow:
+    0 0 10px #ffd27a,
+    0 0 25px #ffd27a,
+    0 0 45px #ffd27a;
+}
+
+/* =========================================================
+   DELIVERY ENVELOPE
+========================================================= */
+
+#delivery-envelope{
+
+    position:absolute;
+
+    width:min(42vw,180px);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    z-index:30;
+}
+
+#delivery-envelope img{
+
+    width:100%;
+    display:block;
+
+    filter:
+    drop-shadow(0 15px 30px rgba(0,0,0,.35));
+}
+
+/* =========================================================
+   LETTER SCENE
+========================================================= */
+
+#letter-scene{
+
+    position:absolute;
+    inset:0;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    visibility:hidden;
+    opacity:0;
+
+    z-index:50;
+}
+
+/* =========================================================
+   LETTER CONTAINER
+========================================================= */
+
+#letter-container{
+
+    position:relative;
+
+    width:min(92vw,520px);
+
+    aspect-ratio:0.72;
+
+    transform:scale(.75);
+
+    opacity:0;
+
+    overflow:hidden;
+}
+
+/* =========================================================
+   PARCHMENT ART
+========================================================= */
+
+#letter-art{
+
+    position:absolute;
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+
+    user-select:none;
+
+    /* Allow touches to pass through the artwork to the scrollable text */
+    pointer-events:none;
+
+    filter:
+    drop-shadow(0 25px 50px rgba(0,0,0,.45));
+}
+
+/* =========================================================
+   CANDLELIGHT
+========================================================= */
+
+#candle-glow{
+
+    position:absolute;
+
+    width:300px;
+    height:300px;
+
+    top:-50px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(255,210,140,.22),
+        transparent 70%
+    );
+
+    pointer-events:none;
+}
+
+/* =========================================================
+   WAX SEAL
+========================================================= */
+
+#seal-container{
+
+    position:absolute;
+
+    width:120px;
+
+    z-index:60;
+}
+
+#seal{
+
+    width:100%;
+    display:block;
+
+    filter:
+    drop-shadow(0 12px 20px rgba(0,0,0,.35));
+}
+
+/* =========================================================
+   LETTER CONTENT
+========================================================= */
+
+#letter-content-area{
+
+    position:absolute;
+
+    top:20%;
+    left:18%;
+    right:18%;
+    bottom:20%;
+
+    overflow-y:auto;
+    padding:0 1rem;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+
+    /* Enable native momentum scrolling and vertical touch panning on mobile */
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+    overscroll-behavior: contain;
+
+    z-index:70;
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+}
+
+#letter-content-area::-webkit-scrollbar{
+    width:0;
+    height:0;
+}
+
+#letter-content{
+
+    color:#1C1A17;
+
+    font-family:'IM Fell English',serif;
+
+    font-size:1rem;
+
+
+    white-space:pre-wrap;
+    max-width:100%;
+}
+
+/* =========================================================
+   QUILL CURSOR
+========================================================= */
+
+#quill-cursor{
+
+    display:inline-block;
+
+    font-size:1.2rem;
+
+    animation:
+    cursorBlink 1s infinite;
+}
+
+@keyframes cursorBlink{
+
+    0%,50%{
+        opacity:1;
+    }
+
+    51%,100%{
+        opacity:0;
+    }
+}
+
+/* =========================================================
+   ENDING
+========================================================= */
+
+#ending-scene{
+
+    position:absolute;
+    inset:0;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    opacity:0;
+    visibility:hidden;
+
+    z-index:100;
+}
+
+#ending-content{
+
+    text-align:center;
+
+    color:#e6d7bd;
+}
+
+#ending-content h2{
+
+    margin:18px 0;
+
+    font-family:'IM Fell English',serif;
+
+    font-size:2rem;
+
+    letter-spacing:4px;
+
+    text-transform:uppercase;
+}
+
+#music-control-bar{
+
+    position:fixed;
+    left:50%;
+    bottom:16px;
+    transform:translateX(-50%);
+
+    width:min(92vw,560px);
+    padding:16px 20px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:16px;
+
+    background:rgba(18,11,4,.82);
+    border:1px solid rgba(234,192,84,.35);
+    border-radius:28px;
+    box-shadow:0 18px 50px rgba(0,0,0,.32);
+
+    z-index:120;
+}
+
+#music-control-text{
+
+    color:#e6d7bd;
+    font-family:'Cormorant Garamond',serif;
+    font-size:1rem;
+    line-height:1.3;
+    letter-spacing:.04em;
+}
+
+#music-toggle-button{
+
+    min-width:96px;
+    padding:10px 18px;
+
+    border:1px solid rgba(234,192,84,.85);
+    border-radius:999px;
+    background:rgba(255,242,212,.95);
+
+    color:#2b1e0f;
+    font-family:'IM Fell English',serif;
+    font-size:1rem;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+
+    cursor:pointer;
+    transition:transform .2s ease, background .2s ease, box-shadow .2s ease;
+}
+
+#music-toggle-button:hover{
+
+    transform:translateY(-1px);
+    background:rgba(237,204,109,.98);
+    box-shadow:0 12px 24px rgba(0,0,0,.16);
+}
+
+#music-toggle-button:active{
+
+    transform:translateY(0);
+}
+
+.star-row{
+
+    font-size:1.2rem;
+
+    letter-spacing:10px;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width:480px){
+
+    #letter-content{
+
+        font-size:1.08rem;
+
+        line-height:1.9;
+    }
+
+    #seal-container{
+
+        width:105px;
+    }
+
+    #letter-container{
+
+        width:95vw;
+    }
+}
+
+/* =========================================================
+   SAFE AREAS
+========================================================= */
+
+#letter-scene{
+
+    padding:
+    max(16px,env(safe-area-inset-top))
+    16px
+    max(16px,env(safe-area-inset-bottom))
+    16px;
+}
+
